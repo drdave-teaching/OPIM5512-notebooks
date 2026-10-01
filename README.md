@@ -8,6 +8,10 @@ Standardized, ready-to-run notebooks for OPIM 5512 — Applied Data Science.
 
 Organized by module. Original source notebooks remain in their respective `*Files` repos.
 
+## 👉 Looking for a notebook? Start here
+
+**[Notebooks by week](NOTEBOOKS_BY_WEEK.md)**: every notebook, in the order the course uses it, with one-click Open in Colab links.
+
 ## Module 1 guides
 
 Start here if you're new to the course:
