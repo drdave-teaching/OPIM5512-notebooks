@@ -1,7 +1,8 @@
-# Lab 5 training data: Bradley weather + Connecticut electricity load, 2023–2025
+# Lab 5 training data: Bradley weather + Connecticut electricity load, Jan 2023 to Oct 2026
 
-**File:** `bdl_ct_load_hourly_2023_2025.csv`, one row per hour, **26,304 rows** (3 Connecticut calendar years:
-midnight Jan 1, 2023 to 11 p.m. Dec 31, 2025, Eastern time). Built step by step in
+**File:** `bdl_ct_load_hourly_2023_2026.csv`, one row per hour, **33,215 rows** (midnight Jan 1, 2023 to
+11 p.m. Oct 15, 2026, Connecticut time: 1,384 days × 24, minus 1 because there are four spring-forward days and only three
+fall-backs in that span). Built step by step in
 `../Lab5_Building_the_Training_Data.ipynb` from the untouched downloads in `raw/`.
 
 | Column | Meaning | Units |
@@ -19,7 +20,7 @@ midnight Jan 1, 2023 to 11 p.m. Dec 31, 2025, Eastern time). Built step by step 
 | `cloud_cover_pct` | Sky covered by the thickest cloud layer | % |
 | `precip_in` | Rain/melted snow in the hour (0.001 = a trace) | inches |
 | `is_rain`, `is_snow`, `is_fog` | Rain or drizzle / snow, sleet or hail / fog or mist reported | 0 or 1 |
-| `weather_imputed` | 1 = no airport report this hour, values were filled (22 hours) | 0 or 1 |
+| `weather_imputed` | 1 = no airport report this hour, values were filled (33 hours) | 0 or 1 |
 | `load_mw` | Average electricity used in the Connecticut zone during the hour | MW |
 | `hour_local` | The same hour on a Connecticut clock, for humans | text |
 
@@ -27,7 +28,7 @@ midnight Jan 1, 2023 to 11 p.m. Dec 31, 2025, Eastern time). Built step by step 
 1. Bradley sends a routine report at :51 every hour plus "special" reports when the weather changes fast. Each report is
    rounded to the nearest hour (10:51 → 11:00, the start of the hour ISO New England labels "11:00"). One report per
    hour: the routine one, otherwise the one closest to the hour.
-2. Lined up against a complete list of hours, so missing hours show up (22 of 26,304).
+2. Lined up against a complete list of hours, so missing hours show up (33 of 33,215).
 3. Units matched to the forecast.weather.gov forecast: knots → mph, sky codes (CLR, FEW, SCT, BKN, OVC, VV) → percent,
    using the thickest of up to 4 cloud layers. Trace rain "T" → 0.001 in. No gust reported → gust = wind speed.
 4. Ranges checked (−9 to 99 °F, humidity ~10–100 %, wind ≤ 35 mph): no broken-sensor values.
@@ -36,6 +37,7 @@ midnight Jan 1, 2023 to 11 p.m. Dec 31, 2025, Eastern time). Built step by step 
 
 **How the load was pulled:** ISO New England web services, real-time hourly demand, Connecticut load zone
 (location 4004), one day at a time. March days have 23 hours and November days 25; in UTC nothing collides.
+`raw/ct_hourly_load_2023_2025_raw.csv` (the original 3 years) is kept because A09 uses it.
 
 **Credits:** weather from the Iowa State Mesonet (mesonet.agron.iastate.edu) archive of NWS/FAA airport reports;
 load from ISO New England (iso-ne.com, ISO Express web services).
