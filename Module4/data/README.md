@@ -24,6 +24,26 @@ fall-backs in that span). Built step by step in
 | `load_mw` | Average electricity used in the Connecticut zone during the hour | MW |
 | `hour_local` | The same hour on a Connecticut clock, for humans | text |
 
+**One airport only: Bradley (BDL).** Every weather column comes from a single station, Bradley International Airport
+in Windsor Locks. Connecticut's load is statewide, so the weather in Bridgeport, New Haven or New London on a given hour
+can differ from Bradley's (sea breeze along the shore, snow inland). Bradley alone is a fine model, and it is all the
+labs need.
+
+**Optional (final project): add more airports.** If you want more weather information, pull other airport stations from
+the Iowa State Mesonet archive (https://mesonet.agron.iastate.edu/request/download.phtml) and clean them the same way
+as `../Lab5_Building_the_Training_Data.ipynb`. Claude can help you write that code. Good candidates:
+- Connecticut: Hartford (HFD), Bridgeport (BDR), New Haven (HVN), Groton/New London (GON), Danbury (DXR),
+  Oxford (OXC), Meriden (MMK), Windham (IJD)
+- Neighbors: White Plains NY (HPN), Westchester and Long Island stations, Westfield/Springfield MA (BAF, CEF),
+  Worcester MA (ORH), Providence RI (PVD), Westerly RI (WST)
+
+The catch: production has to have the same columns. A model trained on extra stations needs **those stations'
+forecasts** every hour too, but `scraper-weather-forecast` only downloads Bradley's. So adding stations also means
+adding their locations to `scraper-weather-forecast` (forecast.weather.gov works for any latitude/longitude),
+building the same columns in `make_features` in your fork's `forecast-24h/main.py`, and updating the feature check in
+Lab 5 Part 7a. (The A09 file in `a09/` has six Connecticut airports, but its problems were planted on purpose for that
+assignment, so pull fresh data instead.)
+
 **How the weather was cleaned**
 1. Bradley sends a routine report at :51 every hour plus "special" reports when the weather changes fast. Each report is
    rounded to the nearest hour (10:51 → 11:00, the start of the hour ISO New England labels "11:00"). One report per
