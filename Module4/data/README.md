@@ -61,3 +61,31 @@ assignment, so pull fresh data instead.)
 
 **Credits:** weather from the Iowa State Mesonet (mesonet.agron.iastate.edu) archive of NWS/FAA airport reports;
 load from ISO New England (iso-ne.com, ISO Express web services).
+
+---
+
+# Lab 6 weather-forecast data: NOAA's HRRR, as issued, and RTMA at Bradley
+
+Both files come from **dynamical.org** (free, no key), which keeps NOAA's weather models in a cloud archive. Built with
+the same reader as `../Lab6A_Frozen_Model_Meets_HRRR.ipynb` Part 4, at the 3 km square nearest Bradley.
+
+**`bdl_hrrr_asissued_2023_2026.csv.gz`**: every 48-hour HRRR run (00, 06, 12 and 18 UTC) since Jan 1, 2023, every
+hour 0 to 48 hours ahead. *As issued* = the numbers published at the time, never revised. One row per (run, hour).
+
+| Column | Meaning | Units |
+|---|---|---|
+| `init_utc` | When the run started (UTC). A run is ready about 1 h 45 min later | timestamp |
+| `lead_hours` | Hours ahead, 0 to 48 | hours |
+| `hour_utc` | The hour being forecast = `init_utc` + `lead_hours` | timestamp |
+| `temp_f`, `dewpoint_f` | 2 m temperature and dew point | °F |
+| `rel_humidity_pct` | 2 m relative humidity | % |
+| `wind_speed_mph` | 10 m wind speed | mph |
+| `cloud_cover_pct` | Total cloud cover | % |
+| `solar_wm2` | Sunlight reaching the ground (downward shortwave) | W/m² |
+
+**`bdl_rtma_temp_2023_2026.csv`**: RTMA (Real-Time Mesoscale Analysis), NOAA's best hourly map of what the weather
+actually was, 2.5 km grid. Temperature only (`temp_f`, °F), one row per UTC hour. Used in Lab 6 as the answer key for
+grading weather forecasts.
+
+The same HRRR runs reach production through Dr. Dave's class job, refreshed every hour at :05:
+https://storage.googleapis.com/opim5512-leaderboard-f26/weather/bdl_hrrr_runs.csv (the 8 newest runs, same columns).
