@@ -114,6 +114,7 @@ On HuskyCT, each week also has a **Notebooks for this week** item with the same 
 | Notebook | What it is | |
 |---|---|---|
 | [NLP_Pandas_HuggingFace (2).ipynb](https://github.com/drdave-teaching/OPIM5512-notebooks/blob/main/Module5/NLP_Pandas_HuggingFace%20%282%29.ipynb) | Pretrained transformers with HuggingFace | [Open in Colab](https://colab.research.google.com/github/drdave-teaching/OPIM5512-notebooks/blob/main/Module5/NLP_Pandas_HuggingFace%20%282%29.ipynb) |
+| [A10_Food_Recalls.ipynb](https://github.com/drdave-teaching/OPIM5512-notebooks/blob/main/Module5/A10_Food_Recalls.ipynb) | A10 (optional, due Wed Dec 9): predict food recall severity from text | [Open in Colab](https://colab.research.google.com/github/drdave-teaching/OPIM5512-notebooks/blob/main/Module5/A10_Food_Recalls.ipynb) |
 
 ## Extras
 
